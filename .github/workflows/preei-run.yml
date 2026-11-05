@@ -1,3 +1,67 @@
+name: Run PreEI R9
+
+on:
+  workflow_dispatch:
+    inputs:
+      dataset:
+        description: 'Profit-augmented TXT file in the repository (Connect is default; any dataset path allowed)'
+        type: string
+        required: true
+        default: 'datasets/connect.txt'
+      lower_threshold:
+        description: 'Lower gain threshold in percent (Connect: 2.5; Mushroom: 1.05)'
+        type: string
+        required: true
+        default: '2.5'
+      upper_threshold:
+        description: 'Upper gain threshold in percent (Connect: 2.8; Mushroom: 1.2)'
+        type: string
+        required: true
+        default: '2.8'
+      verify_reference:
+        description: 'Check all 11 historical stage counts when Connect/Mushroom thresholds match'
+        type: boolean
+        required: true
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  mine:
+    runs-on: windows-2025
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Set up Python for reference validation
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+
+      - name: Check the chosen dataset exists
+        env:
+          PREEI_DATASET: ${{ inputs.dataset }}
+        run: |
+          if (-not (Test-Path -LiteralPath $env:PREEI_DATASET -PathType Leaf)) {
+            Write-Error "Dataset '$env:PREEI_DATASET' not found. Upload the original profit-augmented file under datasets/ and commit it first."
+            exit 1
+          }
+
+      - name: Build headless runner (R9 algorithm files unchanged)
+        run: dotnet build PreEI.Console/PreEI.Console.csproj --configuration Release
+
+      # The split is run in a separate process and is excluded from mining peak MB.
       - name: Split dataset into 80% initial + ten 2% increments
         env:
           PREEI_DATASET: ${{ inputs.dataset }}
