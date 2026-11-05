@@ -52,7 +52,7 @@ def main():
         for problem in problems:
             print(" - " + problem)
         print("Ensure that the dataset has the ORIGINAL profit values and transaction order,")
-        print("and the matching thresholds (Connect: 2.5/2.8; Mushroom: 1.05/1.2).")
+        print("and the matching thresholds defined in validation/reference_profiles.json.")
         return 1
     print("PASS: all 11 erasable-itemset counts and update/full-rescan decisions match the reference.")
     print("Timing and working-set memory are not compared because environments differ.")

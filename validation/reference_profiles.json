@@ -1,0 +1,16 @@
+{
+  "profiles": [
+    {
+      "dataset_file": "connect.txt",
+      "lower_threshold": "2.5",
+      "upper_threshold": "2.8",
+      "reference_csv": "validation/connect_expected_itemset_counts.csv"
+    },
+    {
+      "dataset_file": "mushroom.txt",
+      "lower_threshold": "1.05",
+      "upper_threshold": "1.2",
+      "reference_csv": "validation/mushroom_expected_itemset_counts.csv"
+    }
+  ]
+}
