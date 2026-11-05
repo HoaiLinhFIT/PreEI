@@ -1,0 +1,12 @@
+stage,type,erasable_itemsets
+0,InitialMining,3040135
+1,IncrementalUpdate,2968800
+2,IncrementalUpdate,2517166
+3,IncrementalUpdate,2219321
+4,IncrementalUpdate,1544213
+5,FullRescan,1239090
+6,IncrementalUpdate,876619
+7,IncrementalUpdate,798749
+8,IncrementalUpdate,722779
+9,IncrementalUpdate,606836
+10,IncrementalUpdate,346918

@@ -1,0 +1,60 @@
+2.5--2.8
+
+connect_part1.txt
+Thời gian: 0.5641147
+EI= 3040135
+MB da su dung: 182.76352
+----------------------------------
+Insert lần1 la Update
+Thoi gian: 0.410175
+EI= 2968800
+MB da su dung: 180.846592
+----------------------------------
+Insert lần2 la Update
+Thoi gian: 0.3942706
+EI= 2517166
+MB da su dung: 168.148992
+----------------------------------
+Insert lần3 la Update
+Thoi gian: 0.3593312
+EI= 2219321
+MB da su dung: 159.895552
+----------------------------------
+Insert lần4 la Update
+Thoi gian: 0.2859086
+EI= 1544213
+MB da su dung: 142.053376
+----------------------------------
+Insert lần5 la SCAN lại
+Thoi gian: 0.4645238
+EI= 1239090
+MB da su dung: 189.038592
+----------------------------------
+Insert lần6 la Update
+Thoi gian: 0.2345999
+EI= 876619
+MB da su dung: 142.86848
+----------------------------------
+Insert lần7 la Update
+Thoi gian: 0.2119897
+EI= 798749
+MB da su dung: 189.62432
+----------------------------------
+Insert lần8 la Update
+Thoi gian: 0.1947269
+EI= 722779
+MB da su dung: 137.080832
+----------------------------------
+Insert lần9 la Update
+Thoi gian: 0.1630862
+EI= 606836
+MB da su dung: 159.031296
+----------------------------------
+Insert lần10 la Update
+Thoi gian: 0.1253547
+EI= 346918
+MB da su dung: 120.17664
+----------------------------------
+Nguong: 2.8-2.5
+Tong thoi gian: 3.4080813
+Peak memory usage (MB): 384.68

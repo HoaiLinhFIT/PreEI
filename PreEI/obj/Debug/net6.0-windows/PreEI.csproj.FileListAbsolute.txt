@@ -1,0 +1,17 @@
+C:\Users\HoaiLinh\Downloads\PreEI_R9_GitHub_ConnectDefault_MultiDataset_Validated_DRAFT (1)\PreEI\PreEI\bin\Debug\net6.0-windows\PreEI.exe
+C:\Users\HoaiLinh\Downloads\PreEI_R9_GitHub_ConnectDefault_MultiDataset_Validated_DRAFT (1)\PreEI\PreEI\bin\Debug\net6.0-windows\PreEI.deps.json
+C:\Users\HoaiLinh\Downloads\PreEI_R9_GitHub_ConnectDefault_MultiDataset_Validated_DRAFT (1)\PreEI\PreEI\bin\Debug\net6.0-windows\PreEI.runtimeconfig.json
+C:\Users\HoaiLinh\Downloads\PreEI_R9_GitHub_ConnectDefault_MultiDataset_Validated_DRAFT (1)\PreEI\PreEI\bin\Debug\net6.0-windows\PreEI.dll
+C:\Users\HoaiLinh\Downloads\PreEI_R9_GitHub_ConnectDefault_MultiDataset_Validated_DRAFT (1)\PreEI\PreEI\bin\Debug\net6.0-windows\PreEI.pdb
+C:\Users\HoaiLinh\Downloads\PreEI_R9_GitHub_ConnectDefault_MultiDataset_Validated_DRAFT (1)\PreEI\PreEI\obj\Debug\net6.0-windows\PreEI.csproj.AssemblyReference.cache
+C:\Users\HoaiLinh\Downloads\PreEI_R9_GitHub_ConnectDefault_MultiDataset_Validated_DRAFT (1)\PreEI\PreEI\obj\Debug\net6.0-windows\PreEIApplication.PreEIForm.resources
+C:\Users\HoaiLinh\Downloads\PreEI_R9_GitHub_ConnectDefault_MultiDataset_Validated_DRAFT (1)\PreEI\PreEI\obj\Debug\net6.0-windows\PreEI.csproj.GenerateResource.cache
+C:\Users\HoaiLinh\Downloads\PreEI_R9_GitHub_ConnectDefault_MultiDataset_Validated_DRAFT (1)\PreEI\PreEI\obj\Debug\net6.0-windows\PreEI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HoaiLinh\Downloads\PreEI_R9_GitHub_ConnectDefault_MultiDataset_Validated_DRAFT (1)\PreEI\PreEI\obj\Debug\net6.0-windows\PreEI.AssemblyInfoInputs.cache
+C:\Users\HoaiLinh\Downloads\PreEI_R9_GitHub_ConnectDefault_MultiDataset_Validated_DRAFT (1)\PreEI\PreEI\obj\Debug\net6.0-windows\PreEI.AssemblyInfo.cs
+C:\Users\HoaiLinh\Downloads\PreEI_R9_GitHub_ConnectDefault_MultiDataset_Validated_DRAFT (1)\PreEI\PreEI\obj\Debug\net6.0-windows\PreEI.csproj.CoreCompileInputs.cache
+C:\Users\HoaiLinh\Downloads\PreEI_R9_GitHub_ConnectDefault_MultiDataset_Validated_DRAFT (1)\PreEI\PreEI\obj\Debug\net6.0-windows\PreEI.dll
+C:\Users\HoaiLinh\Downloads\PreEI_R9_GitHub_ConnectDefault_MultiDataset_Validated_DRAFT (1)\PreEI\PreEI\obj\Debug\net6.0-windows\refint\PreEI.dll
+C:\Users\HoaiLinh\Downloads\PreEI_R9_GitHub_ConnectDefault_MultiDataset_Validated_DRAFT (1)\PreEI\PreEI\obj\Debug\net6.0-windows\PreEI.pdb
+C:\Users\HoaiLinh\Downloads\PreEI_R9_GitHub_ConnectDefault_MultiDataset_Validated_DRAFT (1)\PreEI\PreEI\obj\Debug\net6.0-windows\PreEI.genruntimeconfig.cache
+C:\Users\HoaiLinh\Downloads\PreEI_R9_GitHub_ConnectDefault_MultiDataset_Validated_DRAFT (1)\PreEI\PreEI\obj\Debug\net6.0-windows\ref\PreEI.dll
