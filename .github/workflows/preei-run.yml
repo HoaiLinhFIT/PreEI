@@ -1,0 +1,59 @@
+      - name: Split dataset into 80% initial + ten 2% increments
+        env:
+          PREEI_DATASET: ${{ inputs.dataset }}
+        run: |
+          $cli = 'PreEI.Console/bin/Release/net10.0/PreEI.Console.dll'
+          dotnet $cli split --dataset $env:PREEI_DATASET --parts 'outputs/batches'
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Mine all 11 stages and export results
+        env:
+          PREEI_DATASET: ${{ inputs.dataset }}
+          PREEI_LOWER: ${{ inputs.lower_threshold }}
+          PREEI_UPPER: ${{ inputs.upper_threshold }}
+        run: |
+          $cli = 'PreEI.Console/bin/Release/net10.0/PreEI.Console.dll'
+          dotnet $cli mine --dataset $env:PREEI_DATASET --parts 'outputs/batches' `
+            --lower $env:PREEI_LOWER --upper $env:PREEI_UPPER --output 'outputs/results'
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Verify 11 historical results for Connect or Mushroom
+        env:
+          PREEI_DATASET: ${{ inputs.dataset }}
+          PREEI_LOWER: ${{ inputs.lower_threshold }}
+          PREEI_UPPER: ${{ inputs.upper_threshold }}
+          PREEI_VERIFY: ${{ inputs.verify_reference }}
+        run: |
+          $datasetName = [System.IO.Path]::GetFileName($env:PREEI_DATASET).ToLowerInvariant()
+          $lower = [double]::Parse($env:PREEI_LOWER, [System.Globalization.CultureInfo]::InvariantCulture)
+          $upper = [double]::Parse($env:PREEI_UPPER, [System.Globalization.CultureInfo]::InvariantCulture)
+          $reference = ''
+          $actual = ''
+          $reason = 'no historical reference is configured for this dataset/threshold combination'
+          if ($env:PREEI_VERIFY -ne 'true') {
+            $reason = 'reference validation disabled by user'
+          } elseif ($datasetName -eq 'connect.txt' -and $lower -eq 2.5 -and $upper -eq 2.8) {
+            $reference = 'validation/connect_expected_itemset_counts.csv'
+            $actual = 'outputs/results/PreEI_connect_results.csv'
+          } elseif ($datasetName -eq 'mushroom.txt' -and $lower -eq 1.05 -and $upper -eq 1.2) {
+            $reference = 'validation/mushroom_expected_itemset_counts.csv'
+            $actual = 'outputs/results/PreEI_mushroom_results.csv'
+          }
+          if ($reference -ne '') {
+            Write-Host "Reference: $reference"
+            python validation/compare_reference_counts.py $actual $reference |
+              Tee-Object -FilePath 'outputs/results/validation_status.txt'
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          } else {
+            "SKIP: $reason. Output itemset counts are unverified against a historical reference." |
+              Tee-Object -FilePath 'outputs/results/validation_status.txt'
+          }
+
+      - name: Upload CSV, TXT, metadata and split batches
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: preei-r9-run-${{ github.run_number }}
+          path: outputs/
+          if-no-files-found: warn
+          retention-days: 30
