@@ -1,9 +1,0 @@
-Mushroom dataset verification for PreEI paper
-Original source: mushroom.txt
-Original source SHA-256: 0e6313bface1c3de4a2b1e5c2462375cc5e53a0ea1386d4c3369b311ea040b3d
-Original source records: 8124
-Split rule: floor(N*80/100+0.6), then 9 times floor(N*2/100+0.6), last remainder
-Actual part counts: [6499, 163, 163, 163, 163, 163, 163, 163, 163, 163, 158]
-All 11 original part files individually match their expected corresponding sequential source byte ranges.
-Concatenation of all 11 files is byte-for-byte identical to mushroom.txt.
-Exact C# Windows output cannot be compiled/executed in this environment; build and compare SHA-256 on Windows.
