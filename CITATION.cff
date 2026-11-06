@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: >-
+  If you use PreEI Version 1 in research, please cite this software.
+type: software
+title: "PreEI Version 1: Incremental Gain-Based Erasable-Itemset Mining"
+abstract: >-
+  PreEI is a C# implementation of incremental gain-based erasable-itemset
+  mining using compact posting lists, a gain-based re-scanning condition,
+  and prefix-based depth-first exploration. The project includes a WinForms
+  interface and a GitHub Actions console runner that share the mining engine.
+authors:
+  - given-names: "Linh"
+    family-names: "Nguyen"
+  - given-names: "De-Thu"
+    family-names: "Huynh"
+  - given-names: "Giang"
+    family-names: "Nguyen"
+  - given-names: "Bao"
+    family-names: "Huynh"
+version: "1.0.0"
+license: MIT
+repository-code: "https://github.com/HoaiLinhFIT/PreEI"
+url: "https://github.com/HoaiLinhFIT/PreEI"
+keywords:
+  - "erasable itemset mining"
+  - "incremental databases"
+  - "gain-based pruning"
+  - "re-scanning bound"
+  - "PEI-List"
+  - "research software"
