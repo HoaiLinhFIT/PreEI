@@ -1,5 +1,5 @@
-name: Run PreEI R9
-run-name: PreEI R9 - ${{ inputs.dataset }}
+name: Run PreEI Version 1
+run-name: PreEI Version 1 - ${{ inputs.dataset }}
 
 on:
   workflow_dispatch:
@@ -59,7 +59,7 @@ jobs:
             exit 1
           }
 
-      - name: Build headless runner (R9 algorithm files unchanged)
+      - name: Build PreEI Version 1 console runner
         run: dotnet build PreEI.Console/PreEI.Console.csproj --configuration Release
 
       # The split is run in a separate process and is excluded from mining peak MB.
@@ -132,7 +132,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: preei-r9-run-${{ github.run_number }}
+          name: preei-version-1-run-${{ github.run_number }}
           path: outputs/
           if-no-files-found: warn
           retention-days: 30
