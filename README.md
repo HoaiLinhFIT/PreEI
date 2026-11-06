@@ -11,7 +11,6 @@ The same `PreEIMiningEngine.cs` and `DataSplitter.cs` source files are used by t
 
 > **Scope of reproducibility:** GitHub Actions is primarily for checking the number of erasable itemsets and the incremental-update/full-re-scan sequence. Runtime and peak memory are environment-dependent and are not required to equal the measurements reported in the manuscript.
 
-**Vietnamese step-by-step guide:** [GITHUB_ACTIONS_QUICKSTART.md](GITHUB_ACTIONS_QUICKSTART.md)
 
 ## 1. Run on GitHub Actions
 
