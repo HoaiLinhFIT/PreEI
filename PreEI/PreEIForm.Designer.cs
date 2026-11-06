@@ -1,4 +1,4 @@
-﻿namespace PreEIApplication
+namespace PreEIApplication
 {
     partial class PreEIForm
     {
@@ -186,7 +186,7 @@
             this.Controls.Add(this.resultsTreeView);
             this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.Name = "PreEIForm";
-            this.Text = "PreEI - Incremental Erasable Itemset Mining";
+            this.Text = "PreEI Version 1 - Incremental Erasable Itemset Mining";
             this.ResumeLayout(false);
             this.PerformLayout();
 

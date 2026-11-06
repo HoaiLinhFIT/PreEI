@@ -1,18 +1,9 @@
-# Built-in demonstration dataset
+# Profit-augmented datasets
 
-`mushroom.txt` is the **profit-augmented** transaction file supplied with the PreEI research project. It has **8,124 transactions**. The last integer on each line is the assigned transaction profit. It is used in the historical PreEI validation with thresholds **lower = 1.05%**, **upper = 1.2%**, and the fixed **80% initial + 10 x 2%** split.
+Upload the complete profit-augmented transaction files used in your research here, for example `connect.txt`. Dataset files are not bundled with this source release.
 
-**Source attribution for underlying data:**
+Each line contains space-separated integer item IDs followed by the transaction profit as the final integer. The exact input file and record order are necessary when comparing with historical reference counts.
 
-- *Mushroom*, UCI Machine Learning Repository.
-- Dataset DOI: https://doi.org/10.24432/C5959T
-- Original dataset license: Creative Commons Attribution 4.0 International (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/
-- Modifications: transaction encoding into integer item IDs and addition of transaction profit values as supplied for this research project. These values are **not part of UCI's original Mushroom features**.
+GitHub Actions defaults to `datasets/connect.txt`, with lower=2.5% and upper=2.8%. You can select another dataset and threshold pair from the manual workflow form. All datasets use **80% initial + 10 incremental batches of 2% each**.
 
-If publishing this derived dataset, retain the attribution and clearly distinguish the derived values from the original UCI data.
-
-## Connect and additional datasets
-
-The default GitHub Actions input is `datasets/connect.txt`, lower threshold **2.5%** and upper threshold **2.8%**. **Connect is NOT bundled with this archive:** copy the exact profit-augmented Connect transaction file from the author's experiment into this directory and commit it before running the default workflow. Do not replace it with raw Connect data or regenerate the profits. Historical counts and re-scan decisions are recorded in `validation/connect_expected_itemset_counts.csv`, transcribed from the author's `validation/connect_2_5_2_8_original_log.txt`.
-
-The author confirms the standard data division is **80% initial + ten increments of 2%** for all datasets. Other profit-augmented `.txt` datasets can be uploaded under `datasets/` and selected via the GitHub Actions `dataset` input. For datasets with no historical reference, the mining run works but reference validation is skipped.
+When publishing datasets, check redistribution rights and document the source, preprocessing, profit assignment and checksums.

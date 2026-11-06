@@ -2,11 +2,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
+    <Version>1.0.0</Version>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <!-- Exact R9 engine and splitter sources: no duplicated algorithm. -->
+    <!-- The WinForms engine and splitter are linked unchanged: no duplicated algorithm. -->
     <Compile Include="../PreEI/Mining/*.cs" Link="Mining/%(Filename)%(Extension)" />
     <Compile Include="../PreEI/DataSplitter.cs" Link="DataSplitter.cs" />
   </ItemGroup>

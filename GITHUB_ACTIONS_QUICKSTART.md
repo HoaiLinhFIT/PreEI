@@ -1,54 +1,38 @@
-# Chạy PreEI R9 trên GitHub Actions (Connect mặc định, chọn được dataset khác)
+# Hướng dẫn chạy PreEI Version 1 trên GitHub
 
-## 1. Chuẩn bị
+## 1. Chuẩn bị dữ liệu
 
-- Giải nén gói, tải **nội dung của thư mục `PreEI/`** lên thư mục gốc của repository GitHub. Đặc biệt phải giữ `.github/workflows/preei-run.yml` (đây là thư mục ẩn trên Windows).
-- File `datasets/mushroom.txt` có sẵn để thử.
-- **File `datasets/connect.txt` chưa có trong gói**. Bạn cần tải lên **chính file Connect đã gán profit của thí nghiệm**, không phải dữ liệu Connect thô. Mỗi dòng gồm các item ID nguyên, số nguyên cuối cùng là profit của giao dịch; thứ tự dòng phải giữ nguyên.
-- Toàn bộ dataset được chia cùng một quy tắc: **80% ban đầu + 10 batch, mỗi batch 2%**; thứ tự giao dịch giữ nguyên và không tạo profit mới.
+Tải file Connect **đã gán profit** lên repository tại `datasets/connect.txt`. File dữ liệu này không có sẵn trong gói mã nguồn. Nếu muốn dùng dữ liệu khác, tải lên thư mục `datasets/` và chọn đường dẫn của file khi chạy.
 
-## 2. Chạy Connect
+## 2. Chạy GitHub Actions
 
-Vào **Actions → Run PreEI R9 → Run workflow** trên nhánh mặc định. Các trường được điền sẵn:
+1. Trong repository, mở **Actions**.
+2. Ở bên trái, chọn **Run PreEI Version 1**.
+3. Nhấn **Run workflow** và chọn nhánh mặc định (`main`, nếu repository dùng nhánh này).
+4. Giữ nguyên các giá trị mặc định nếu chạy Connect:
+   - Dataset: `datasets/connect.txt`
+   - Lower threshold: `2.5`
+   - Upper threshold: `2.8`
+   - Verify reference: bật
+5. Nhấn **Run workflow** để bắt đầu.
 
-| Trường | Giá trị |
-| --- | --- |
-| `dataset` | `datasets/connect.txt` |
-| `lower_threshold` | `2.5` |
-| `upper_threshold` | `2.8` |
-| `verify_reference` | `true` |
+Chương trình tự chia dữ liệu thành **80% ban đầu + 10 batch, mỗi batch 2%**, sau đó khai phá đủ 11 giai đoạn.
 
-Nhấn **Run workflow** để chạy. GitHub tự động biên dịch bằng .NET 10, chia 11 batch và chạy thuật toán PreEI R9. Kiểm tra **11 số lượng erasable itemsets và quyết định re-scan** bằng `validation/connect_expected_itemset_counts.csv` được trích từ log gốc `validation/connect_2_5_2_8_original_log.txt`. Mốc quan trọng: stage 0 = 3.040.135; stage 5 = FullRescan / 1.239.090; stage 10 = 346.918.
+## 3. Xem kiểm chứng và tải kết quả
 
-**Quan trọng:** Nếu dữ liệu Connect không đúng bản gán profit/đúng thứ tự đã dùng để tạo log gốc, bước kiểm chứng có thể FAIL; điều đó không tự động chứng minh thuật toán sai. Kiểm tra dữ liệu và ngưỡng trước.
+Mở lần chạy trong **Actions**:
 
-## 3. Chạy Mushroom hoặc dataset khác
+- Job **mine** sẽ có bước **Verify 11 stages against matching reference**.
+- Nếu có tham chiếu phù hợp, bước kiểm chứng sẽ trả về **PASS** hoặc báo lỗi khi kết quả không khớp.
+- Nếu không có tham chiếu phù hợp, trạng thái là **SKIP**; điều đó không có nghĩa là đã kiểm chứng thành công.
+- Trong trang **Summary**, tìm **Artifacts** và tải gói `preei-version-1-run-...` để lấy CSV, TXT, `run_metadata.json` và `validation_status.txt`.
 
-- **Mushroom**: đặt `dataset` = `datasets/mushroom.txt`, `lower_threshold` = `1.05`, `upper_threshold` = `1.2`. GitHub sẽ kiểm chứng 11 stage bằng kết quả Mushroom gốc.
-- **Dataset khác**: tải file .txt đã gán profit vào `datasets/`, nhập đường dẫn như `datasets/retail.txt`, sau đó nhập lower/upper thích hợp. Việc khai phá vẫn chạy 80% + 10 × 2%; kiểm chứng với log gốc được **bỏ qua** nếu chưa có bộ tham chiếu đúng cho dataset/ngưỡng ấy.
-- Nếu muốn chạy Connect/Mushroom với profit hoặc ngưỡng khác mà không đối chiếu log, bỏ chọn `verify_reference`. Dòng `validation_status.txt` sẽ ghi `SKIP` chứ không ghi `PASS`.
+## 4. Chạy dataset khác
 
-## 4. Xem kết quả
+Ở **Run workflow**, thay `dataset` bằng đường dẫn tương đối tới file đã tải lên (ví dụ `datasets/retail.txt`), rồi nhập lower/upper phù hợp. Phép chia 80% + 10 × 2% áp dụng cho tất cả dataset. Muốn kiểm chứng tự động thêm dataset, khai báo một profile phù hợp trong `validation/reference_profiles.json` và cung cấp file CSV tham chiếu của dataset đó.
 
-Sau khi workflow xong, bấm vào lần chạy trong **Actions**, kéo tới **Artifacts**, tải `preei-r9-run-...`:
+## 5. Phân biệt các số đo
 
-- `results/PreEI_<dataset>_results.csv`: 11 dòng stage và dòng TOTAL
-- `results/PreEI_<dataset>_results.txt`: báo cáo dễ đọc
-- `results/run_metadata.json`: ngưỡng, đường dẫn, SHA-256 dataset, phiên bản .NET, OS
-- `results/validation_status.txt`: PASS, FAIL hoặc SKIP (nếu bước so sánh đã chạy)
-- `batches/`: 11 file chia cùng `split_manifest.csv`
+GitHub Actions dùng Windows runner + .NET 10 (Console), còn ứng dụng WinForms dùng .NET 6. Runtime và peak memory có thể khác trên các máy khác nhau. Hãy sử dụng GitHub Actions chủ yếu để kiểm tra số lượng itemsets và quyết định incremental update/full re-scan; không lấy số đo GitHub thay trực tiếp số liệu benchmark từ máy thí nghiệm khác.
 
-**Phạm vi đo:** CSV/TXT, giao diện, chia file ban đầu không tính vào runtime/MB mining. `PeakWorkingSet64` là đặc tính tiến trình và phụ thuộc môi trường chạy; không yêu cầu bằng máy tác giả. Phần thuật toán `PreEI/Mining/*.cs` và splitter `PreEI/DataSplitter.cs` được CLI liên kết trực tiếp, không chép/sửa logic.
-
-## 5. Tự kiểm chứng CSV trong máy
-
-```powershell
-python validation/compare_reference_counts.py "PreEI_connect_results.csv" validation/connect_expected_itemset_counts.csv
-python validation/compare_reference_counts.py "PreEI_mushroom_results.csv" validation/mushroom_expected_itemset_counts.csv
-```
-
-Chỉ so sánh với log nếu dùng **đúng file profit-augmented và đúng ngưỡng**. Không so runtime hoặc memory với file tham chiếu.
-
-## 6. Trạng thái
-
-Bộ mã đã được kiểm tra cú pháp/CSV/workflow ở mức tĩnh, **chưa biên dịch hoặc chạy thực tế bằng GitHub Actions trong môi trường này**. Sau khi tải lên repository, cần chạy thử ít nhất một job thật và xem kết quả kiểm chứng.
+**Lưu ý:** Đổi tên sang PreEI Version 1 không làm thay đổi thuật toán, ngưỡng, điều kiện re-scan, `result_EIs` hoặc cách đo runtime/memory.

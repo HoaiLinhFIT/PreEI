@@ -7,7 +7,7 @@ using PreEIApplication.Mining;
 namespace PreEIApplication;
 
 /// <summary>
-/// Noninteractive entry point for GitHub Actions. The R9 mining engine and
+/// Noninteractive entry point for GitHub Actions. The PreEI Version 1 mining engine and
 /// DataSplitter are linked as original source files, without code changes.
 /// Run "split" and "mine" in two separate processes so data preparation does
 /// not inflate the mining process's lifetime peak-working-set measurement.
@@ -117,7 +117,7 @@ internal static class Program
         WriteText(result, textPath, dataset, lowerPercentage, upperPercentage);
         WriteMetadata(result, metadataPath, dataset, lowerPercentage, upperPercentage, batchPaths);
 
-        Console.WriteLine("Mining complete (R9 engine; output export excluded from measurements).");
+        Console.WriteLine("Mining complete (PreEI Version 1; output export excluded from measurements).");
         foreach (MiningStageResult stage in result.Stages)
             Console.WriteLine($"Stage {stage.StageIndex,2}: {stage.StageType,-17} " +
                 $"itemsets={stage.ErasableItemsetCount,10:N0} " +
@@ -152,7 +152,7 @@ internal static class Program
         double lowerPercentage, double upperPercentage)
     {
         using var writer = new StreamWriter(path);
-        writer.WriteLine("PreEI R9 - mining result");
+        writer.WriteLine("PreEI Version 1 - mining result");
         writer.WriteLine("Dataset: " + Path.GetFileName(dataset));
         writer.WriteLine($"Gain threshold (%): lower={lowerPercentage.ToString(CultureInfo.InvariantCulture)}, " +
             $"upper={upperPercentage.ToString(CultureInfo.InvariantCulture)}");
@@ -177,7 +177,7 @@ internal static class Program
         var metadata = new
         {
             algorithm = "PreEI",
-            source_version = "R9 (original mining source linked unchanged)",
+            source_version = "PreEI Version 1",
             dataset = Path.GetFileName(dataset),
             dataset_sha256 = datasetSha256,
             threshold_unit = "percent",
@@ -203,10 +203,10 @@ internal static class Program
 
     private static void PrintUsage()
     {
-        Console.WriteLine("PreEI R9 CLI (shares R9 engine sources; .NET 10)");
+        Console.WriteLine("PreEI Version 1 CLI (shares the WinForms mining engine sources; .NET 10)");
         Console.WriteLine("  split --dataset <profit_dataset.txt> --parts <parts_dir>");
         Console.WriteLine("  mine  --dataset <profit_dataset.txt> --parts <parts_dir> " +
             "--lower <percent> --upper <percent> --output <results_dir>");
-        Console.WriteLine("Example: lower=1.05 upper=1.2 (values expressed as percentages).");
+        Console.WriteLine("Example: lower=2.5 upper=2.8 (values expressed as percentages).");
     }
 }
